@@ -5,8 +5,8 @@ workflows:
     jobs:
       - shellcheck/check
       - build_docker_image:
-        requires:
-          - shellcheck/check
+          requires:
+            - shellcheck/check
 
 orbs:
   shellcheck: circleci/shellcheck@2.2.2
