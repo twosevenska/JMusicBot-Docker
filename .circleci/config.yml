@@ -1,21 +1,26 @@
 version: 2.1
+
+workflows:
+  check-build:
+    jobs:
+      - shellcheck/check
+      - build_docker_image:
+        requires:
+          - shellcheck/check
+
+orbs:
+  shellcheck: circleci/shellcheck@2.2.2
+
 jobs:
   build_docker_image:
     docker:
-      - image: cimg/base:2020.01
+      - image: cimg/base:stable
     steps:
       - checkout
       - setup_remote_docker:
-          docker_layer_caching: false
+          docker_layer_caching: true
       - run:
           name: Build Docker image
           command: |
-            export IMAGE_NAME=jmusicbot            
-            docker build -t $DOCKER_LOGIN/$IMAGE_NAME -t $DOCKER_LOGIN/$IMAGE_NAME:latest .
             echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin
-            docker push $DOCKER_LOGIN/$IMAGE_NAME
-
-workflows:
-  build:
-    jobs:
-      - build_docker_image
+            ./DockerBuildPush.sh
