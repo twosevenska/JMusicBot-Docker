@@ -1,4 +1,4 @@
-FROM kubespheredev/java-11-runtime@sha256:272494b580cdf400ffce833eda0d437ceb45e8663f3db183b95325674c40a788
+FROM adoptopenjdk/openjdk11:alpine-slim@sha256:bb8831bfc8eceee7c7b63b3d77cb097e371e3d228cf5cd43020d1da04c3eb239
 
 WORKDIR /bot
 
