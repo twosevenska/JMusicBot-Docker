@@ -1,4 +1,4 @@
-FROM lwieske/java-8:jdk-8u181-slim
+FROM kubespheredev/java-11-runtime@sha256:272494b580cdf400ffce833eda0d437ceb45e8663f3db183b95325674c40a788
 
 WORKDIR /bot
 
